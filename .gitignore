@@ -5,6 +5,7 @@
 /functions/node_modules/
 /server/.env
 /server/node_modules/
+/android/app/google-services.json
 
 # Miscellaneous
 *.class
