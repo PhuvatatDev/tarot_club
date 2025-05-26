@@ -1,6 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:tarot_club/features/auth/presentation/pages/login_page.dart';
 import 'package:tarot_club/firebase_options.dart';
+import 'package:tarot_club/themes/dark_mode.dart';
+import 'package:tarot_club/themes/light_mode.dart';
 
 void main() async{
   // firebase setup
@@ -17,7 +20,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(),
+      home: LoginPage(),
+      theme: lightMode,
+      darkTheme: darkMode,
     );
   }
 }

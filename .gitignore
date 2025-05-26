@@ -1,3 +1,11 @@
+# 🔐 SECURITY: Never commit backend secrets
+**/firebase-adminsdk-*.json
+**/serviceAccountKey.json
+/functions/.env
+/functions/node_modules/
+/server/.env
+/server/node_modules/
+
 # Miscellaneous
 *.class
 *.log
@@ -18,9 +26,7 @@ migrate_working_dir/
 *.iws
 .idea/
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
+# VSCode
 .vscode/
 
 # Flutter/Dart/Pub related
@@ -31,7 +37,7 @@ migrate_working_dir/
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
-/build/
+build/
 
 # Symbolication related
 app.*.symbols
@@ -44,8 +50,6 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-
-# Firebase & config
+# Firebase config
 lib/firebase_options.dart
 *.env
-.env
