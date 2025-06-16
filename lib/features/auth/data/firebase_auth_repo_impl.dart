@@ -16,6 +16,8 @@ class FirebaseAuthRepoImpl implements AuthRepo {
           .signInWithEmailAndPassword(email: email, password: password);
 
       //create user
+      //todo: creer a AppUser in cloud function.
+      //! la logique de creer AppUser est dans le frontend.
       AppUser user = AppUser(
         uid: userCredential.user!.uid,
         email: email,

@@ -1,34 +1,20 @@
-/*
-
-LOGIN PAGE UI
-
-On this page, a user can login with thier:
--email
--password
-
-----------------------------------------------------------------------------------------------------------------
-
-Once the user Succesfully logs in, they will be directed to homapage 
-
-If user doesn't have an account, they can go to registerpage to create one.
-
-*/
-
 import 'package:flutter/material.dart';
 import 'package:tarot_club/features/auth/presentation/components/my_button.dart';
-import 'package:tarot_club/features/auth/presentation/components/my_textfild.dart'; // Ajout de l'import
+import 'package:tarot_club/features/auth/presentation/components/my_textfild.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   // Ajout des contrôleurs pour email et mot de passe
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPwController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 // nome of app
                 Text(
-                  "Tarot Club",
+                  "Let's create an account for you",
                   style: TextStyle(
                     fontSize: 26,
                     color: Theme.of(context).colorScheme.inversePrimary,
@@ -66,6 +52,17 @@ class _LoginPageState extends State<LoginPage> {
                 ),
 
                 const SizedBox(height: 25),
+
+                // name textfield
+                MyTextField(
+                  controller: nameController,
+                  hintext: "Name",
+                  obscureText: false,
+                ),
+
+                const SizedBox(
+                  height: 16,
+                ),
 
                 // email textfield
                 MyTextField(
@@ -84,31 +81,24 @@ class _LoginPageState extends State<LoginPage> {
                 ),
 
                 const SizedBox(
-                  height: 10,
+                  height: 16,
                 ),
 
-                // forgot pw
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Mot de Passe oublier",
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+                // confirm pw textfiled
+                MyTextField(
+                  controller: confirmPwController,
+                  hintext: "Confirmer le mot de passe",
+                  obscureText: true,
                 ),
 
                 const SizedBox(
                   height: 25,
                 ),
 
-                // login button
+                // register button
                 MyButton(
                   onTap: () {},
-                  text: "LOGIN",
+                  text: "SIGN UP",
                 ),
 
                 const SizedBox(
@@ -117,17 +107,17 @@ class _LoginPageState extends State<LoginPage> {
 
                 // auth sigh in later.... (google + apple)
 
-                // don't have an account? register now!
+                // already have an account? login now!
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Don't have a accont?",
+                      "Already have an account?",
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.primary),
                     ),
                     Text(
-                      "register now",
+                      "Login now",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.primary,
