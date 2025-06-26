@@ -19,13 +19,16 @@ import 'package:tarot_club/features/auth/presentation/components/my_button.dart'
 import 'package:tarot_club/features/auth/presentation/components/my_textfild.dart'; // Ajout de l'import
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+    // toggle page fonction import from auth_page
+  final void Function()? togglePage;
+  const LoginPage({super.key, required this.togglePage});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+
   // Ajout des contrôleurs pour email et mot de passe
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -126,11 +129,14 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.primary),
                     ),
-                    Text(
-                      "register now",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.primary,
+                    GestureDetector(
+                      onTap: widget.togglePage,
+                      child: Text(
+                        "register now",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                       ),
                     )
                   ],

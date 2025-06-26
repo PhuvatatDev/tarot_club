@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tarot_club/features/auth/domain/entities/app_user.dart';
 import 'package:tarot_club/features/auth/domain/repos/auth_repo.dart';
 
-class FirebaseAuthRepoImpl implements AuthRepo {
+class FirebaseAuthRepo implements AuthRepo {
   // acess to firebase
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   // LOGIN : Email and Password
@@ -15,9 +15,6 @@ class FirebaseAuthRepoImpl implements AuthRepo {
       UserCredential userCredential = await firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
 
-      //create user
-      //todo: creer a AppUser in cloud function.
-      //! la logique de creer AppUser est dans le frontend.
       AppUser user = AppUser(
         uid: userCredential.user!.uid,
         email: email,
@@ -40,6 +37,9 @@ class FirebaseAuthRepoImpl implements AuthRepo {
         email: email,
         password: password,
       );
+
+      //todo: creer a AppUser in cloud function.
+      //! la logique de creer AppUser est dans le frontend.
 
       AppUser user = AppUser(
         uid: userCredential.user!.uid,

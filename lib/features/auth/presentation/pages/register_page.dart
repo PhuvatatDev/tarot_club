@@ -3,7 +3,8 @@ import 'package:tarot_club/features/auth/presentation/components/my_button.dart'
 import 'package:tarot_club/features/auth/presentation/components/my_textfild.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+  final void Function()? togglePage;
+  const RegisterPage({super.key, required this.togglePage});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -116,11 +117,14 @@ class _RegisterPageState extends State<RegisterPage> {
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.primary),
                     ),
-                    Text(
-                      "Login now",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.primary,
+                    GestureDetector(
+                      onTap: widget.togglePage,
+                      child: Text(
+                        "Login now",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                       ),
                     )
                   ],
