@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tarot_club/features/auth/presentation/components/my_button.dart';
 import 'package:tarot_club/features/auth/presentation/components/my_textfild.dart';
+import 'package:tarot_club/features/auth/presentation/cubits/auth_cubit.dart';
 
 class RegisterPage extends StatefulWidget {
   final void Function()? togglePage;
@@ -16,6 +18,41 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPwController = TextEditingController();
+
+  void register() {
+    final String name = nameController.text;
+    final String email = emailController.text;
+    final String pw = passwordController.text;
+    final String confirmPw = confirmPwController.text;
+
+    // get the authcubit
+    final authCubit = context.read<AuthCubit>();
+
+    // ensure fields aren't empty
+    if (email.isNotEmpty &&
+        name.isNotEmpty &&
+        pw.isNotEmpty &&
+        confirmPw.isNotEmpty) {
+      // ensure pw match
+      if (pw == confirmPw) {
+        authCubit.register(name, email, pw);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('password do not match!')));
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("please complete all fields!")));
+    }
+  }
+
+  @override
+  void dispose(){
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPwController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +135,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 // register button
                 MyButton(
-                  onTap: () {},
+                  onTap: register,
                   text: "SIGN UP",
                 ),
 
