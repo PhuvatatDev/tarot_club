@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tarot_club/features/auth/presentation/components/my_button.dart';
 import 'package:tarot_club/features/auth/presentation/components/my_textfild.dart';
 import 'package:tarot_club/features/auth/presentation/cubits/auth_cubit.dart';
+import 'package:tarot_club/features/auth/presentation/cubits/auth_state.dart';
 
 class RegisterPage extends StatefulWidget {
   final void Function()? togglePage;
@@ -20,8 +21,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController confirmPwController = TextEditingController();
 
   void register() {
-    final String name = nameController.text;
-    final String email = emailController.text;
+    final String name = nameController.text.trim();
+    final String email = emailController.text.trim();
     final String pw = passwordController.text;
     final String confirmPw = confirmPwController.text;
 
@@ -41,12 +42,13 @@ class _RegisterPageState extends State<RegisterPage> {
             const SnackBar(content: Text('password do not match!')));
       }
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("please complete all fields!")));
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("please complete all fields!")));
     }
   }
 
   @override
-  void dispose(){
+  void dispose() {
     nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
@@ -56,119 +58,100 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    // SCAFFOLD
     return SafeArea(
       child: Scaffold(
-        // APPBAR
         appBar: AppBar(
-          title: Text('Login page'),
+          title: const Text('Login page'),
           centerTitle: true,
         ),
-        // BODY
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // logo
-                Icon(
-                  Icons.lock_open,
-                  size: 80,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-
-                const SizedBox(height: 25),
-
-                // nome of app
-                Text(
-                  "Let's create an account for you",
-                  style: TextStyle(
-                    fontSize: 26,
-                    color: Theme.of(context).colorScheme.inversePrimary,
-                  ),
-                ),
-
-                const SizedBox(height: 25),
-
-                // name textfield
-                MyTextField(
-                  controller: nameController,
-                  hintext: "Name",
-                  obscureText: false,
-                ),
-
-                const SizedBox(
-                  height: 16,
-                ),
-
-                // email textfield
-                MyTextField(
-                  controller: emailController,
-                  hintext: "Email",
-                  obscureText: false,
-                ),
-
-                const SizedBox(height: 16),
-
-                // pw textfield
-                MyTextField(
-                  controller: passwordController,
-                  hintext: "Mot de passe",
-                  obscureText: true,
-                ),
-
-                const SizedBox(
-                  height: 16,
-                ),
-
-                // confirm pw textfiled
-                MyTextField(
-                  controller: confirmPwController,
-                  hintext: "Confirmer le mot de passe",
-                  obscureText: true,
-                ),
-
-                const SizedBox(
-                  height: 25,
-                ),
-
-                // register button
-                MyButton(
-                  onTap: register,
-                  text: "SIGN UP",
-                ),
-
-                const SizedBox(
-                  height: 25,
-                ),
-
-                // auth sigh in later.... (google + apple)
-
-                // already have an account? login now!
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Already have an account?",
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary),
-                    ),
-                    GestureDetector(
-                      onTap: widget.togglePage,
-                      child: Text(
-                        "Login now",
+        body: BlocConsumer<AuthCubit, AuthState>(
+          listener: (context, state) {
+            if (state is AuthError) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(state.message)),
+              );
+            }
+          },
+          builder: (context, state) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.lock_open,
+                        size: 80,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      const SizedBox(height: 25),
+                      Text(
+                        "Let's create an account for you",
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.primary,
+                          fontSize: 26,
+                          color: Theme.of(context).colorScheme.inversePrimary,
                         ),
                       ),
-                    )
-                  ],
+                      const SizedBox(height: 25),
+                      MyTextField(
+                        controller: nameController,
+                        hintext: "Name",
+                        obscureText: false,
+                      ),
+                      const SizedBox(height: 16),
+                      MyTextField(
+                        controller: emailController,
+                        hintext: "Email",
+                        obscureText: false,
+                      ),
+                      const SizedBox(height: 16),
+                      MyTextField(
+                        controller: passwordController,
+                        hintext: "Mot de passe",
+                        obscureText: true,
+                      ),
+                      const SizedBox(height: 16),
+                      MyTextField(
+                        controller: confirmPwController,
+                        hintext: "Confirmer le mot de passe",
+                        obscureText: true,
+                      ),
+                      const SizedBox(height: 25),
+                      MyButton(
+                        onTap: register,
+                        text: "SIGN UP",
+                      ),
+                      const SizedBox(height: 16),
+                      if (state is AuthLoading)
+                        const CircularProgressIndicator(),
+                      const SizedBox(height: 25),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Already have an account?",
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary),
+                          ),
+                          GestureDetector(
+                            onTap: widget.togglePage,
+                            child: Text(
+                              " Login now",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );

@@ -1,25 +1,29 @@
 class AppUser {
   final String uid;
   final String email;
+  final String? name;
 
   AppUser({
     required this.uid,
     required this.email,
+    this.name,
   });
 
-  // methode to convert app user -> json
+  // méthode pour convertir AppUser → JSON
   Map<String, dynamic> toJson() {
     return {
       "uid": uid,
       "email": email,
+      "name": name,
     };
   }
 
-  // methode to covert json to app user
-  factory AppUser.formJson(Map<String, dynamic> jsonUser) {
+  // méthode pour convertir JSON → AppUser
+  factory AppUser.fromJson(Map<String, dynamic> jsonUser) {
     return AppUser(
-      uid: jsonUser["uid"], 
+      uid: jsonUser["uid"],
       email: jsonUser["email"],
-      );
+      name: jsonUser["name"],
+    );
   }
 }
