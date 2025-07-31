@@ -1,1 +1,40 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"tarotclub-42a5c","appId":"1:625476917683:android:56d90292360f77f66093c6","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"tarotclub-42a5c","configurations":{"android":"1:625476917683:android:56d90292360f77f66093c6","ios":"1:625476917683:ios:4fb498f432236fec6093c6","web":"1:625476917683:web:ba6a8d2b7b3bbc066093c6"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "tarotclub-42a5c",
+          "appId": "1:625476917683:android:56d90292360f77f66093c6",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "tarotclub-42a5c",
+          "configurations": {
+            "android": "1:625476917683:android:56d90292360f77f66093c6",
+            "ios": "1:625476917683:ios:4fb498f432236fec6093c6",
+            "web": "1:625476917683:web:ba6a8d2b7b3bbc066093c6"
+          }
+        }
+      }
+    }
+  },
+  "functions": [
+    {
+      "source": "firebase_backend/functions",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run lint",
+        "npm --prefix \"$RESOURCE_DIR\" run build"
+      ]
+    }
+  ]
+}

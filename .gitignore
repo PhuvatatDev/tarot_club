@@ -56,3 +56,4 @@ lib/firebase_options.dart
 *.env
 android/app/google-services.json
 ios/Runner/GoogleService-Info.plist 
+firebase_backend/functions/lib

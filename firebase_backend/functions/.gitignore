@@ -1,0 +1,14 @@
+# TypeScript compiled output
+lib/
+
+# Node.js dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# TypeScript v1 declaration files (rarely needed today)
+typings/
+
+# Local config files
+*.local
