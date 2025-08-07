@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tarot_club/app.dart';
 import 'package:tarot_club/features/auth/data/firebase_auth_repo_impl.dart';
 import 'package:tarot_club/features/auth/domain/repos/auth_repo.dart';
-import 'package:tarot_club/firebase_options.dart';
+import 'package:tarot_club/config/firebase/firebase_options.dart';
 
 void main() async {
   // firebase setup

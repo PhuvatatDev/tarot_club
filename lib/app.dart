@@ -9,8 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tarot_club/features/auth/data/firebase_auth_repo_impl.dart';
 import 'package:tarot_club/features/auth/presentation/pages/auth_gate.dart';
 import 'package:tarot_club/features/auth/presentation/cubits/auth_cubit.dart';
-import 'package:tarot_club/themes/dark_mode.dart';
-import 'package:tarot_club/themes/light_mode.dart';
+import 'package:tarot_club/config/themes/dark_mode.dart';
+import 'package:tarot_club/config/themes/light_mode.dart';
 
 class MyApp extends StatelessWidget {
   final firebaseAuthRepo = FirebaseAuthRepo();
